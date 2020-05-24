@@ -1,0 +1,26 @@
+<h1 id="httpbin">httpbin</h1>
+<h2 id="description">Description</h2>
+<p>This configuration represents external resource <a href="https://httpbin.org">httpbin</a> in ISTIO service mesh.</p>
+<h2 id="files">Files</h2>
+<p>http-service.yaml - Used for adding domain name in kubernetes cluster</p>
+<p>httpbin-serviceentry.yaml - Creates rule for envoy to route traffic with specified (httpbin) host name to specified endpoints. Resolution will be appealed only in service-meshed workloads</p>
+<p>httpbin-endpoints.yaml - Creates endpoints for httpbin-service.yaml. Works for all workloads. Use either serviceentry(service-mesh only) either endpoints(project-wide)</p>
+<p>httpbin-virtualservice.yaml - Creates route mesh-&gt;istio-egressgateway-&gt;httpbin. Uses istio-system/nginx2-egressgateway gateway</p>
+<h2 id="boot">Boot</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<p>Should be created nginx2-egressgateway gateway in istio-system namespace with egressgateway service.</p>
+<h3 id="service-serviceentry">Service + ServiceEntry</h3>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="ex">kubectl</span> apply \
+    -f httpbin-service.yaml \
+        -f httpbin-serviceentry.yaml</code></pre></div>
+<h3 id="service-endpoints">Service + Endpoints</h3>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="ex">kubectl</span> apply \
+    -f httpbin-service.yaml \
+        -f httpbin-endpoints.yaml</code></pre></div>
+<h3 id="route-through-egressgateway">Route through egressgateway</h3>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="ex">kubectl</span> apply \
+    -f httpbin-service.yaml \
+        -f httpbin-serviceentry.yaml \
+    -f httpbin-virtualservice.yaml</code></pre></div>
+<h3 id="cleanup">Cleanup</h3>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="ex">kubectl</span> delete svc,virtualservice,serviceentry -l app=httpbin --ignore-not-found=true</code></pre></div>

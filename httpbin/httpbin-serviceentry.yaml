@@ -2,15 +2,22 @@ apiVersion: networking.istio.io/v1alpha3
 kind: ServiceEntry
 metadata:
   name: httpbin-serviceentry
+  labels:
+    app: httpbin
 spec:
   hosts:
-  - httpbin # not used
+  - httpbin
+  - httpbin.default.svc.cluster.local
   location: MESH_EXTERNAL
-  addresses:
-  - 35.170.216.115
-  - 34.230.193.231
   ports:
   - number: 80
     name: http-80
     protocol: HTTP
-  resolution: NONE
+  resolution: STATIC
+  endpoints:
+  - address: 35.170.216.115
+    ports:
+      http-80: 80
+  - address: 35.170.216.115
+    ports:
+      http-80: 80
