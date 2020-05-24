@@ -6,7 +6,7 @@ metadata:
     app: httpbin
 spec:
   hosts:
-  - httpbin
+#  - httpbin
   - httpbin.default.svc.cluster.local
   location: MESH_EXTERNAL
   ports:

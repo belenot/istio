@@ -6,10 +6,9 @@ metadata:
     app: httpbin
 spec:
   hosts:
-  - httpbin
-  - httpbin.default.svc.cluster.local # short name resolved
+  - httpbin.default.svc.cluster.local
   gateways:
-  - istio-system/nginx2-egressgateway
+  - istio-system/istio-egressgateway
   - mesh
   http:
   - name: "httpbin"
@@ -25,9 +24,9 @@ spec:
       authority: httpbin.default.svc.cluster.local
   - name: "httpbin"
     match:
-    - name: "nginx2-egressgateway"
+    - name: "istio-egressgateway"
       gateways:
-      - istio-system/nginx2-egressgateway
+      - istio-system/istio-egressgateway
       port: 80
     route:
     - destination:
