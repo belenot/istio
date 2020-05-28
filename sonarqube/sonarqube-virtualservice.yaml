@@ -1,0 +1,24 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: sonarqube
+spec:
+  hosts:
+  - '*'
+  gateways:
+  - istio-system/istio-ingressgateway
+  http:
+  - name: "sonarqube"
+    match:
+    - port: 9000
+#    - uri:
+#        prefix: "/sonarqube/"
+#    - uri:
+#        prefix: "/sonarqube"
+#    rewrite:
+#      uri: "/"
+    route:
+    - destination:
+        host: sonarqube.default.svc.cluster.local
+        port:
+          number: 9000
