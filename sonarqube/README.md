@@ -11,7 +11,7 @@ This configuration exposes sonarqube server.
 Ingressgateway istio-system/istio-ingressgateway should be configured for accepting traffic
 on port HTTPS 443.
 
-Accessible on **https://<ingress-host>:443/sonarqube**
+Accessible on `https://<ingress-host>:443/sonarqube`
 
 ### Deploy
 
