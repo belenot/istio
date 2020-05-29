@@ -9,7 +9,9 @@ This configuration exposes sonarqube server.
 ### Prerequisites
 
 Ingressgateway istio-system/istio-ingressgateway should be configured for accepting traffic
-on port 9000. (Expose 9000 on service)
+on port HTTPS 443.
+
+Accessible on **https://<ingress-host>:443/sonarqube**
 
 ### Deploy
 

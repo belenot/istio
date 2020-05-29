@@ -10,13 +10,13 @@ spec:
   http:
   - name: "sonarqube"
     match:
-    - port: 9000
-#    - uri:
-#        prefix: "/sonarqube/"
-#    - uri:
-#        prefix: "/sonarqube"
-#    rewrite:
-#      uri: "/"
+    - port: 443
+    - uri:
+        prefix: "/sonarqube/"
+    - uri:
+        prefix: "/sonarqube"
+#     rewrite:
+#       uri: "/"
     route:
     - destination:
         host: sonarqube.default.svc.cluster.local
